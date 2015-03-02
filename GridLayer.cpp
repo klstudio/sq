@@ -1079,5 +1079,11 @@ void GridLayer::addHintButton()
 
 void GridLayer::showHint(CCObject* pSender)
 {
-
+    //currently pause state is only used for hint and tutorial(level 1)
+    if( !isPaused() ) {
+        HintLayer *hint_layer = HintLayer::create(_curLevel, this);
+        hint_layer->setPosition(CCPointZero);
+        this->addChild(hint_layer, z_ForeGround2);
+    }
 }
+

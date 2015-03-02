@@ -102,10 +102,17 @@ void LevelClearLayer::init(int userScore, int levelGoal, int curLevel, ClearType
             add_menu("btn_nextlevel_on.png", "btn_nextlevel_off.png", pMenu, LevelClearLayer::nextlevel);
             pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
             nextY = nextY - spaceBetween - btnHeight;
+
+            add_menu("btn_replaylevel_on.png", "btn_replaylevel_off.png", pMenu, LevelClearLayer::replay);
+            pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
+        }else{
+            if( Lite_Version ) {
+                add_menu("btn_fullversion_on.png", "btn_fullversion_off.png", pMenu, LevelClearLayer::getFullVersion);
+                pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
+                nextY = nextY - spaceBetween - btnHeight;
+            }
         }
 
-        add_menu("btn_replaylevel_on.png", "btn_replaylevel_off.png", pMenu, LevelClearLayer::replay);
-        pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
     }else if(type == eOutOfMoves) {
         //level fail
         _capTitle =  CCSprite::createWithSpriteFrameName("cap_level_fail.png");
@@ -117,11 +124,13 @@ void LevelClearLayer::init(int userScore, int levelGoal, int curLevel, ClearType
         add_menu("btn_replaylevel_on.png", "btn_replaylevel_off.png", pMenu, LevelClearLayer::replay);
         pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
 
+#if 0
         nextY = nextY - spaceBetween - btnHeight;
         if( LevelData::sharedLevelData()->hasHint(_curLevel) ) {
             add_menu("btn_hint_on.png", "btn_hint_off.png", pMenu, LevelClearLayer::showHint);
             pMenu->setPosition(ccp(center_position.x, nextY - btnHeight/2 - spaceBetween));
         }
+#endif
     }
 }
 
@@ -172,6 +181,11 @@ void LevelClearLayer::nextlevel(CCObject* pSender)
     //To Do: check max level
     CCScene* newScene = CCTransitionMoveInR::create(0.2f, PuzzleGameScene::scene(_curLevel + 1, _curLevel, false));
     CCDirector::sharedDirector()->replaceScene(newScene);
+}
+
+void LevelClearLayer::getFullVersion(CCObject* pSender)
+{
+    CCApplication::sharedApplication()->openURL("https://itunes.apple.com/us/app/squarecraft/id967120548");
 }
 
 

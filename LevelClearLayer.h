@@ -43,6 +43,7 @@ class LevelClearLayer : public CCLayerColor {
         void nextlevel(CCObject* pSender);
         void clear();
         void showHint();
+        void getFullVersion(CCObject* pSender);
 };
 
 
