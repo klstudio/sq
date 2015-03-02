@@ -29,7 +29,7 @@ void HintLayer::ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event)
 
 }
 
-HintLayer* create(int curLevel, GridLayer *gridLayer)
+HintLayer* HintLayer::create(int curLevel, GridLayer *gridLayer)
 {
     HintLayer* node = new HintLayer();
     if(!node) {
@@ -45,6 +45,7 @@ HintLayer* create(int curLevel, GridLayer *gridLayer)
 void HintLayer::init(int curLevel, GridLayer *gridLayer)
 {
     char fn[50];
+    CCLayerColor::initWithColor( ccc4(20,20,100,0) );
 
     _gridLayer = gridLayer;
     _curLevel = curLevel;

@@ -24,7 +24,7 @@ class HintLayer : public CCLayerColor {
 
         static HintLayer* create(int curLevel, GridLayer *gridLayer);
 
-        void init(int curLevel);
+        void init(int curLevel, GridLayer *gridLayer);
         int _curLevel;
 
     private:
